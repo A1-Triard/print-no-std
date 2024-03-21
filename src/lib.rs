@@ -1,4 +1,5 @@
 #![deny(warnings)]
+#![allow(clippy::unnecessary_literal_unwrap)]
 
 #![no_std]
 
@@ -127,7 +128,7 @@ mod posix {
         let mut iconv_in = s.as_ptr();
         let mut iconv_in_len = s.len();
         loop {
-            let mut iconv_out = (&mut buf[..]).as_mut_ptr();
+            let mut iconv_out = (buf[..]).as_mut_ptr();
             let mut iconv_out_len = buf.len();
             let iconv_res = unsafe { iconv(
                 conv,
