@@ -1,3 +1,7 @@
+#![deny(warnings)]
+
+#![no_std]
+
 use core::fmt::{self};
 
 #[doc(hidden)]
@@ -172,6 +176,8 @@ mod posix {
 #[cfg(target_os="dos")]
 mod dos {
     use crate::WriteErrorStrategy;
+    use core::fmt::{self};
+    use core::fmt::Write as fmt_Write;
     use dos_cp::DosStdout;
 
     pub type StdHandle = ();
@@ -180,7 +186,7 @@ mod dos {
 
     pub const STDERR: () = ();
 
-    pub fn write_str((): (), s: &str, error_strategy: WriteErrorStrategy) -> fmt::Result {
+    pub fn write_str((): StdHandle, s: &str, error_strategy: WriteErrorStrategy) -> fmt::Result {
         if let Err(e) = (DosStdout { panic: error_strategy == WriteErrorStrategy::Panic }).write_str(s) {
             if error_strategy == WriteErrorStrategy::Passthrough { Err(e) } else { Ok(()) }
         } else {

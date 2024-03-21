@@ -21,3 +21,6 @@ winapi = { version = "0.3.9", features = ["consoleapi", "handleapi", "processenv
 
 [target.'cfg(not(windows))'.dependencies]
 libc = { version = "0.2.153", default-features = false }
+
+[target.'cfg(target_os="dos")'.dependencies]
+dos-cp = { version = "0.5.2", default-features = false, features = ["load"] }
