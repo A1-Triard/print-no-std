@@ -1,8 +1,23 @@
 [package]
+edition = "2021"
 name = "print-no-std"
 version = "0.1.0"
-edition = "2021"
+rust-version = "1.71"
+authors = ["warlock <internalmike@gmail.com>"]
+description = "The `print`/`eprint` macros for no_std Windows/Linux/UNIX/DOS apps."
+readme = "README.md"
+documentation = "https://docs.rs/print-no-std/"
+keywords = ["print", "no_std", "unix", "windows", "linux"]
+categories = ["os", "no-std"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/A1-Triard/print-no-std"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[target.'cfg(not(target_os="dos"))'.dependencies]
+errno-no-std = { version = "0.2.1", default-features = false }
 
-[dependencies]
+[target.'cfg(all(not(target_os="dos"), windows))'.dependencies]
+iter-identify_first_last = { version = "0.2.1", default-features = false }
+winapi = { version = "0.3.9", features = ["consoleapi", "handleapi", "processenv"] }
+
+[target.'cfg(not(windows))'.dependencies]
+libc = { version = "0.2.153", default-features = false }
