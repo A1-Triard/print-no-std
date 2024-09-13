@@ -4,6 +4,9 @@ name = "hworld"
 version = "0.0.0"
 publish = false
 
+[lints.rust]
+unexpected_cfgs = { level = "allow" }
+
 [profile.dev]
 panic = "abort"
 
@@ -15,14 +18,14 @@ panic = "abort"
 strip = true
 
 [dependencies]
-panic-no-std = "0.0.1"
-panicking = { version = "0.4.0", default-features = false, features = ["abort"] }
+panic-no-std = "0.1.0"
+panicking = { version = "0.5.0", default-features = false, features = ["abort"] }
 pc-atomics = "0.0.2"
 print-no-std = { path = "../.." }
 rlibc = "1.0.0"
 
 [target.'cfg(target_os="dos")'.dependencies]
-dos-cp = { version = "0.5.2", default-features = false, features = ["load"] }
+dos-cp = { version = "0.7.0", default-features = false, features = ["load"] }
 
 [build-dependencies]
-dos-cp-generator = "0.5.1"
+dos-cp-generator = "0.7.0"

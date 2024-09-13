@@ -11,5 +11,5 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
-panic-no-std = "0.0.1"
+panic-no-std = "0.1.0"
 print-no-std = { path = ".." }
