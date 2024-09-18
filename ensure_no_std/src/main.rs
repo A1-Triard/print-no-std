@@ -17,7 +17,7 @@ fn panic_hanlder(info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-extern fn rust_eh_personality() { }
+extern "C" fn rust_eh_personality() { }
 
 use print_no_std::println;
 
