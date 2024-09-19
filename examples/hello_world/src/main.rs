@@ -7,7 +7,6 @@
 #![no_std]
 #![cfg_attr(target_os="dos", no_main)]
 
-extern crate pc_atomics;
 extern crate rlibc_ext;
 
 mod no_std {
