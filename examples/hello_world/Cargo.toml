@@ -25,6 +25,7 @@ rlibc-ext = "0.2.0"
 
 [target.'cfg(target_os="dos")'.dependencies]
 dos-cp = { version = "0.7.0", default-features = false, features = ["load"] }
+exit-no-std = "0.2.1"
 
 [build-dependencies]
 dos-cp-generator = "0.7.0"

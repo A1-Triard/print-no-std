@@ -14,11 +14,6 @@ mod no_std {
     fn panic_handler(info: &core::panic::PanicInfo) -> ! { panic_no_std::panic(info, b'P') }
 }
 
-#[cfg(target_os="dos")]
-extern {
-    type PEB;
-}
-
 #[cfg(not(target_os="dos"))]
 #[start]
 fn main(_: isize, _: *const *const u8) -> isize {
@@ -29,10 +24,10 @@ fn main(_: isize, _: *const *const u8) -> isize {
 #[cfg(target_os="dos")]
 #[allow(non_snake_case)]
 #[no_mangle]
-extern "stdcall" fn mainCRTStartup(_: *const PEB) -> u64 {
+extern "C" fn mainCRTStartup() -> ! {
     dos_cp::CodePage::load_or_exit_with_msg(99);
     start();
-    0
+    exit_no_std::exit(0)
 }
 
 use print_no_std::println;
