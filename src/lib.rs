@@ -116,7 +116,7 @@ mod posix {
     const ICONV_ERR: iconv_t = (-1isize) as usize as iconv_t;
 
     pub fn write_str(std_handle: StdHandle, s: &str, error_strategy: WriteErrorStrategy) -> fmt::Result {
-        let conv = unsafe { iconv_open(nl_langinfo(CODESET), b"UTF-8\0".as_ptr() as _) };
+        let conv = unsafe { iconv_open(nl_langinfo(CODESET), c"UTF-8".as_ptr() as _) };
         if conv == ICONV_ERR {
             match error_strategy {
                 WriteErrorStrategy::Passthrough => return Err(fmt::Error),
